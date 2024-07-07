@@ -248,7 +248,7 @@ VALUES ('5', '5', 'description 500', '500.67', '2018-01-24');
 
 
 
--- Generate more than 1000 new records for the Branch table
+-- Generate more than 1 million new records for the Branch table
 DO $$
     DECLARE
         i INT;
@@ -259,7 +259,7 @@ DO $$
     END
 $$;
 
--- Generate more than 1000 new records for the Card table
+-- Generate more than 1 million new records for the Card table
 DO $$
     DECLARE
         i INT;
@@ -270,7 +270,7 @@ DO $$
     END
 $$;
 
--- Generate more than 1000 new records for the Loan_type table
+-- Generate more than 1 million new records for the Loan_type table
 DO $$
     DECLARE
         i INT;
@@ -281,18 +281,31 @@ DO $$
     END
 $$;
 
--- Generate more than 1000 new records for the Customer table
+-- Generate more than 1 million new records for the Customer table
 DO $$
     DECLARE
         i INT;
+        random_name TEXT;
+        random_surname TEXT;
+        random_dob DATE;
+        names TEXT[] := ARRAY['John', 'Jane', 'Mike', 'Mary', 'Chris', 'Anna', 'Robert', 'Patricia'];
+        surnames TEXT[] := ARRAY['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis'];
     BEGIN
         FOR i IN 6..1000005 LOOP
-                INSERT INTO Customer (id, branch_id, first_name, last_name, date_of_birth, gender) VALUES (i, i % 5 + 1, 'First' || i, 'Last' || i, '1990-01-01', CASE WHEN i % 2 = 0 THEN 'male' ELSE 'female' END);
+                -- Randomly select a name and a surname from the arrays
+                random_name := names[1 + (RANDOM() * (ARRAY_LENGTH(names, 1) - 1))::INT];
+                random_surname := surnames[1 + (RANDOM() * (ARRAY_LENGTH(surnames, 1) - 1))::INT];
+
+                -- Generate a random date of birth between 1950-01-01 and 2005-12-31
+                random_dob := '1950-01-01'::DATE + (RANDOM() * ('2005-12-31'::DATE - '1950-01-01'::DATE))::INT;
+
+                INSERT INTO Customer (id, branch_id, first_name, last_name, date_of_birth, gender)
+                VALUES (i, i % 5 + 1, random_name, random_surname, random_dob, CASE WHEN i % 2 = 0 THEN 'male' ELSE 'female' END);
             END LOOP;
     END
 $$;
 
--- Generate more than 1000 new records for the Account table
+-- Generate more than 1 million new records for the Account table
 DO $$
     DECLARE
         i INT;
@@ -303,7 +316,7 @@ DO $$
     END
 $$;
 
--- Generate more than 1000 new records for the Loan table
+-- Generate more than 1 million new records for the Loan table
 DO $$
     DECLARE
         i INT;
@@ -323,7 +336,7 @@ DO $$
     END
 $$;
 
--- Generate more than 1000 new records for the Transaction table
+-- Generate more than 1 million new records for the Transaction table
 DO $$
     DECLARE
         i INT;
