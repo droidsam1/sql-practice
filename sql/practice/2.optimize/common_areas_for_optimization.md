@@ -1,0 +1,16 @@
+# Common areas for Optimization
+
+1. **Indexing**: Look for Seq Scans where you expect Index Scans
+2. **Joins**: Nested loops are OK for small datasets, Hash joins or merge joins might be more
+   efficient for larger tables
+    1. Ensure indexes are present on the columns used for joining tables
+    2. Place the table with the least number of rows first to filter as early as possible
+    3. Reduce rows early applying filters as soon as possible
+    4. Use the appropriate type of join
+    5. Partitioning for very large tables
+3. **Filtering**:  Ensure filters are applied as early as possible to reduce the number of rows processed
+4. **Sorting**: They can be expensive, avoid sorting if possible
+5. **Aggregations**: Hash-based aggregation is faster than sort-based aggregation
+
+If the query is used frequently and the data does not change often, consider using a materialized
+   view
