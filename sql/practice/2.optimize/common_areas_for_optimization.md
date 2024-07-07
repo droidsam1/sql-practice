@@ -14,3 +14,8 @@
 
 If the query is used frequently and the data does not change often, consider using a materialized
    view
+
+Resources:
+
+* https://planetscale.com/learn/courses/mysql-for-developers/indexes/introduction-to-indexes?autoplay=1
+* https://planetscale.com/learn/courses/database-scaling/scaling/db-and-query-tuning?autoplay=1
