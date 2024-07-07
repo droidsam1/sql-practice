@@ -4,6 +4,6 @@ Based on:
 
 https://github.com/panaitescu-paul/Bank-Database-SQL-2020
 
-Adapter to work with PostgreSQL
+Adapted to work with PostgresSQL
 
 @credits: **https://github.com/panaitescu-paul**
