@@ -15,7 +15,15 @@
 If the query is used frequently and the data does not change often, consider using a materialized
    view
 
+## Other notes
+
+1. **Avoid SELECT '*'** : SELECT * is highly inefficient
+2. **Inner joins vs. WHERE clause**: WHERE clause creates the CROSS join/ CARTESIAN product for merging tables. CARTESIAN product of two tables takes a lot of time.
+3. **IN versus EXISTS**:
+   IN operator is more costly than EXISTS regarding scans, especially when the subquery result is a large dataset. So, we should try to use EXISTS rather than IN to fetch results with a subquery.
+
 Resources:
 
 * https://planetscale.com/learn/courses/mysql-for-developers/indexes/introduction-to-indexes?autoplay=1
 * https://planetscale.com/learn/courses/database-scaling/scaling/db-and-query-tuning?autoplay=1
+* https://www.analyticsvidhya.com/blog/2021/10/a-detailed-guide-on-sql-query-optimization/
